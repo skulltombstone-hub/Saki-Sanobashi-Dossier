@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README Viewer</title>
+
+    <!-- Biblioteca Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="content">Carregando README...</div>
+
+<script>
+async function loadReadme() {
+    try {
+        const response = await fetch("README.md");
+        const markdown = await response.text();
+
+        document.getElementById("content").innerHTML =
+            marked.parse(markdown);
+    } catch (error) {
+        document.getElementById("content").innerHTML =
+            "<h2>Erro ao carregar README.md</h2>";
+        console.error(error);
+    }
+}
+
+loadReadme();
+</script>
+
+</body>
+</html>
